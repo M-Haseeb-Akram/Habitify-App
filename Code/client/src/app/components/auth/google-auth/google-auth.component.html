@@ -1,0 +1,34 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <mat-card-header>
+            <img
+                src="assets/images/habitify.jpg"
+                alt="image"
+                width="50px"
+                height="50px"
+            />
+        </mat-card-header>
+        <mat-card-content class="mt-1">
+            <strong><h2>Welcome to Habitify</h2></strong>
+            <p class="text-secondary">
+                Sign in to your account and start building good habits with
+                Habitify.
+            </p>
+            <button
+                mat-icon-button
+                class="shadow google mt-3"
+                (click)="handleLoginAction()"
+            >
+                <mat-icon svgIcon="google"></mat-icon>
+                Sign In with Google
+            </button>
+            <button mat-icon-button class="apple my-3">
+                <mat-icon svgIcon="apple"></mat-icon>
+                Sign In with Apple
+            </button>
+            <a href="#" class="text-secondary" style="text-decoration: none"
+                ><p>Sign in with Email</p></a
+            >
+        </mat-card-content>
+    </mat-card>
+</div>

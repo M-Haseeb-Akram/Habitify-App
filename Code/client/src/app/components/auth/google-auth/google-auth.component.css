@@ -1,0 +1,77 @@
+:host {
+    position: absolute;
+    /* z-index: 3;
+  top: 50%; */
+    left: 50%;
+    font-family: sans-serif;
+    display: flex;
+    /* flex-direction:column;  */
+    justify-content: center;
+    vertical-align: middle;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.login-wrapper {
+    height: 100%;
+}
+
+.box {
+    position: relative;
+    text-align: center;
+    opacity: 1;
+    padding: 50px 10px 20px 10px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    z-index: 3;
+    max-width: 430px;
+}
+.box h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.login-wrapper mat-card-header {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: 700;
+}
+
+.login-wrapper .mat-card {
+    padding: 40px 70px 50px;
+}
+img {
+    border: 1px solid rgb(219, 216, 216);
+    border-radius: 20%;
+}
+
+.google {
+    width: 100%;
+    background-color: white;
+    padding: 10px 3px 5px 6px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+.google .mat-icon {
+    float: left;
+    margin-left: 6px;
+}
+
+.apple {
+    width: 100%;
+    background-color: black;
+    padding: 10px 3px 5px 6px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+}
+.apple .mat-icon {
+    margin-left: 3px;
+}

@@ -1,0 +1,107 @@
+<div class="main">
+    <h3 mat-dialog-title>New Habit</h3>
+    <form [formGroup]="habitsForm" (ngSubmit)="onAddHabit()">
+        <div mat-dialog-content>
+            <label for="name" class="mb-1">NAME</label>
+            <div class="fields">
+                <input
+                    type="text"
+                    style="width: 420px"
+                    formControlName="name"
+                />
+                <mat-icon color="primary">help</mat-icon>
+            </div>
+            <div class="fields mt-2">
+                <div>
+                    <label for="goal" class="mb-1">GOAL</label>
+                    <input
+                        type="number"
+                        value="1"
+                        style="width: 90px"
+                        formControlName="Goal"
+                    />
+                </div>
+                <div>
+                    <select name="time" style="margin-top: 25px; width: 90px">
+                        <option value="times" selected>Times</option>
+                        <option value="Mins">Mins</option>
+                    </select>
+                </div>
+                <div>
+                    <select
+                        name="iteration"
+                        style="margin-top: 25px; width: 90px"
+                        formControlName="schedual"
+                    >
+                        <option value="1" selected>Per Day</option>
+                        <option value="7">Per Week</option>
+                        <option value="31">Per Month</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="repeat" style="margin-left: 10px" class="mb-1"
+                        >REPEAT</label
+                    >
+                    <select
+                        name="repeat"
+                        style="width: 140px"
+                        formControlName="repeat"
+                    >
+                        <option value="Daily" selected>Daily</option>
+                        <option value="Monthly">Monthly</option>
+                    </select>
+                </div>
+            </div>
+            <div class="fields mt-2">
+                <div>
+                    <label for="goal" class="mb-1">TIME OF DAY</label>
+                    <select
+                        name="catagoty"
+                        style="width: 290px; margin-left: 0px !important"
+                        formControlName="catagory"
+                    >
+                        <option value="All" selected>Any Time</option>
+                        <option value="Morning">Morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                        <option value="Evening">Evening</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="date" style="margin-left: 10px" class="mb-1"
+                        >START DATE</label
+                    >
+                    <input
+                        type="date"
+                        style="width: 140px; margin-left: 10px"
+                        value="{{ Today }}"
+                        formControlName="start_date"
+                    />
+                </div>
+            </div>
+            <div class="fields mt-2">
+                <div>
+                    <label for="date" class="mb-1">REMINDERS</label>
+                    <input type="text" style="width: 440px" />
+                </div>
+            </div>
+        </div>
+
+        <div mat-dialog-actions class="footer">
+            <button
+                mat-button
+                (click)="onNoClick()"
+                class="btn btn-secondary mx-2"
+            >
+                Cancel
+            </button>
+            <button
+                mat-button
+                [disabled]="!habitsForm.valid"
+                class="btn btn-primary"
+                type="submit"
+            >
+                Save
+            </button>
+        </div>
+    </form>
+</div>

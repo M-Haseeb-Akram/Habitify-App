@@ -1,0 +1,60 @@
+:host {
+    font-size: small;
+    font-family: sans-serif;
+}
+h3 {
+    font-weight: 500;
+}
+.top-menu {
+    padding: 7px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50px !important;
+}
+.menu-list {
+    display: flex;
+    flex-direction: row;
+}
+.menu-list button {
+    padding: 4px;
+    border: #e2e0e0 1px solid;
+    background-color: transparent;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2px;
+    color: rgb(122, 123, 124);
+    font-weight: bold;
+    height: 30px !important;
+}
+.active {
+    background-color: blue !important;
+    color: white !important;
+}
+mat-icon {
+    font-size: 18px;
+}
+.dropdown {
+    display: flex;
+    flex-direction: column;
+}
+.dropdown button {
+    padding: 5px 5px 5px 2px;
+    background-color: transparent;
+    color: rgb(122, 123, 124);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    height: 30px !important;
+    font-size: small;
+}
+.dropdown button:hover {
+    background-color: #0000ff !important;
+    color: white !important;
+    border-radius: 0px !important;
+}
+.dropdown button span {
+    margin-left: 30px;
+}

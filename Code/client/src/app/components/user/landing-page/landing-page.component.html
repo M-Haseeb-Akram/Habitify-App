@@ -1,0 +1,23 @@
+<mat-sidenav-container *ngIf="isLoading === false" autosize>
+    <mat-sidenav mode="side" opened="true">
+        <app-side-nav></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="row main">
+            <div class="col-md-8 content">
+                <app-top-nav></app-top-nav>
+                <mat-divider></mat-divider>
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col-md-4 track-status">
+                <app-habits-progress></app-habits-progress>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<div
+    *ngIf="isLoading === true"
+    class="d-flex justify-content-center h-80 align-items-center"
+>
+    <div class="spinner-border text-primary" role="status"></div>
+</div>

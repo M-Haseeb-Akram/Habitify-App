@@ -1,0 +1,85 @@
+<div class="top-menu">
+    <h3>All Habits</h3>
+    <div class="menu-list">
+        <button>
+            <mat-icon>search</mat-icon>
+        </button>
+        <button>
+            <mat-icon>calendar_today</mat-icon>
+            <span class="px-1">Today</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <button #sortTrigger="matMenuTrigger" [matMenuTriggerFor]="sorting">
+            <mat-icon>sort</mat-icon>
+            <span class="px-1">Albhabeticall</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #sorting="matMenu" [overlapTrigger]="false" class="mt-2">
+            <div class="dropdown">
+                <button mat-fab class="menu-button">
+                    <mat-icon></mat-icon>
+                    <span>Reminder Time</span>
+                </button>
+                <button mat-fab class="menu-button">
+                    <mat-icon></mat-icon>
+                    <span>My Habits Order</span>
+                </button>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    [matMenuTriggerFor]="subAlphabet"
+                    #alphabetsTrigger="matMenuTrigger"
+                    (mouseover)="alphabetsTrigger.openMenu()"
+                >
+                    <mat-icon></mat-icon>
+                    <span>Alphabetical</span>
+                    <mat-icon>arrow_right</mat-icon>
+                </button>
+                <mat-menu
+                    #subAlphabet="matMenu"
+                    [overlapTrigger]="false"
+                    class="ml-1"
+                    xPosition="before"
+                >
+                    <div class="dropdown">
+                        <button mat-fab class="menu-button">
+                            <mat-icon></mat-icon>
+                            <span>A-Z</span>
+                        </button>
+                        <button mat-fab class="menu-button">
+                            <mat-icon></mat-icon>
+                            <span>Z-A</span>
+                        </button>
+                    </div>
+                </mat-menu>
+            </div>
+        </mat-menu>
+        <button
+            class="active"
+            #addHabitTrigger="matMenuTrigger"
+            [matMenuTriggerFor]="addHabit"
+        >
+            <mat-icon>add</mat-icon>
+            <span>Add Habits</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #addHabit="matMenu" [overlapTrigger]="false" class="mt-2">
+            <div class="dropdown">
+                <button mat-fab class="menu-button" (click)="openDialog()">
+                    <mat-icon>all_inclusive</mat-icon>
+                    <span>Create Good Habit</span>
+                </button>
+                <button mat-fab class="menu-button">
+                    <mat-icon>block</mat-icon>
+                    <span>Break Bad Habit</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button mat-fab class="menu-button">
+                    <mat-icon>add</mat-icon>
+                    <span>Log Mood</span>
+                    <mat-icon>arrow_right</mat-icon>
+                </button>
+            </div>
+        </mat-menu>
+    </div>
+</div>

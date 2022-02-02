@@ -1,0 +1,60 @@
+<div class="sidenav-container">
+    <div class="mt-4">
+        <button
+            mat-fab
+            class="mb-3 user"
+            #ddTrigger="matMenuTrigger"
+            [matMenuTriggerFor]="dd"
+        >
+            <img
+                src="{{ profile.user.picture }}"
+                width="45px"
+                height="45px"
+                class="rounded-circle"
+            />
+            <span>{{ profile.user.name }}</span>
+        </button>
+        <mat-menu #dd="matMenu" [overlapTrigger]="false">
+            <div class="dropdown">
+                <button mat-fab class="menu-button">
+                    <mat-icon>person</mat-icon>
+                    <span>Profile</span>
+                </button>
+                <button mat-fab class="menu-button" (click)="handleLogout()">
+                    <mat-icon>logout</mat-icon>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </mat-menu>
+        <button mat-fab class="menu-button active">
+            <mat-icon>inbox</mat-icon>
+            <span>All Habits</span>
+        </button>
+        <button mat-fab class="menu-button">
+            <mat-icon>{{ timeIcon }}</mat-icon>
+            <span>{{ time }}</span>
+        </button>
+        <p class="text-secondary mt-3 mb-1">AREAS</p>
+        <button mat-fab class="menu-button">
+            <mat-icon>folder</mat-icon>
+            <span>Lahore</span>
+        </button>
+        <button mat-fab class="menu-button">
+            <mat-icon>add</mat-icon>
+            <span>New Area</span>
+        </button>
+        <p class="text-secondary mt-3 mb-1">PREFERENCES</p>
+        <button mat-fab class="menu-button">
+            <mat-icon>list</mat-icon>
+            <span>Manage Habits</span>
+        </button>
+        <button mat-fab class="menu-button">
+            <mat-icon>settings</mat-icon>
+            <span>App Settings</span>
+        </button>
+        <button mat-fab class="menu-button">
+            <mat-icon>share</mat-icon>
+            <span>Resources</span>
+        </button>
+    </div>
+</div>

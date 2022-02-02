@@ -1,0 +1,59 @@
+h3 {
+    font-weight: 500;
+    color: black !important;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-icon {
+    padding: 5px;
+    border: #e2e0e0 1px solid;
+    border-radius: 3px;
+    margin-left: 2px;
+    font-size: medium;
+}
+.main label {
+    font-size: small;
+    font-family: sans-serif;
+    font-weight: 500;
+}
+.main select {
+    height: 25px;
+    border: #e2e0e0 1px solid;
+    border-radius: 2px;
+    padding-left: 5px;
+    background-color: transparent;
+    color: rgb(105, 104, 104);
+    margin-left: 10px;
+}
+select:focus {
+    outline-color: blue !important;
+}
+.main input {
+    height: 25px;
+    border: #e2e0e0 1px solid;
+    border-radius: 2px;
+    padding: 5px;
+    color: rgb(105, 104, 104);
+}
+input:focus {
+    outline-color: blue !important;
+}
+.footer {
+    padding-left: 300px;
+}
+.fields {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+.main label {
+    color: rgb(105, 104, 104);
+}
+input.ng-invalid.ng-dirty {
+    outline-color: red !important;
+    border: red 1px solid;
+}

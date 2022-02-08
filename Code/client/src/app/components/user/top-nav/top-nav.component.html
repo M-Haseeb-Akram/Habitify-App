@@ -1,18 +1,26 @@
 <div class="top-menu">
     <h3>All Habits</h3>
     <div class="menu-list">
-        <button>
+        <button (click)="search = true">
             <mat-icon>search</mat-icon>
+            <input
+                *ngIf="search"
+                type="text"
+                class="search"
+                placeholder="Search"
+                #input
+                (focusout)="search = false"
+            />
         </button>
         <button>
             <mat-icon>calendar_today</mat-icon>
-            <span class="px-1">Today</span>
-            <mat-icon>arrow_drop_down</mat-icon>
+            <span class="px-1" *ngIf="!search">Today</span>
+            <mat-icon *ngIf="!search">arrow_drop_down</mat-icon>
         </button>
         <button #sortTrigger="matMenuTrigger" [matMenuTriggerFor]="sorting">
             <mat-icon>sort</mat-icon>
-            <span class="px-1">Albhabeticall</span>
-            <mat-icon>arrow_drop_down</mat-icon>
+            <span class="px-1" *ngIf="!search">Albhabeticall</span>
+            <mat-icon *ngIf="!search">arrow_drop_down</mat-icon>
         </button>
         <mat-menu #sorting="matMenu" [overlapTrigger]="false" class="mt-2">
             <div class="dropdown">

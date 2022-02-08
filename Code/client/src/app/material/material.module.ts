@@ -11,6 +11,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { NgModule } from '@angular/core';
 
 
@@ -28,7 +29,7 @@ const MaterialComponents = [
     MatInputModule,
     MatMenuModule,
     MatIconModule,
-
+    MatExpansionModule,
 ]
 
 @NgModule({

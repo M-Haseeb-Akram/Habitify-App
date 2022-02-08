@@ -1,21 +1,128 @@
-<div class="no-habits">
-    <div class="mt-1 demo">
-        <mat-icon style="color: green">directions_bike</mat-icon>
-        <div class="bar-1"></div>
+<div *ngIf="dailyHabits">
+    <div *ngFor="let habits of dailyHabits">
+        <div class="habits mt-3">
+            <div class="status-action">
+                <mat-icon svgIcon="question" class="question_icon"></mat-icon>
+                <div class="title">
+                    <strong>{{ habits.Name }}</strong>
+                    <small class="text-secondary"
+                        >0 / {{ habits.Goal }} times</small
+                    >
+                </div>
+            </div>
+            <div class="status-action">
+                <button class="mx-2" *ngIf="habits.Goal > 1">
+                    <mat-icon>add</mat-icon>
+                    <span>1</span>
+                </button>
+                <button class="mx-2" *ngIf="habits.Goal == 1">
+                    <mat-icon>done</mat-icon>
+                    <span>Done</span>
+                </button>
+                <button>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
     </div>
-    <div class="mt-1 demo">
-        <mat-icon color="primary">directions_run</mat-icon>
-        <div class="bar-1"></div>
+    <div class="weekly" *ngIf="weeklyHabits.length > 0">
+        <mat-expansion-panel class="my-3">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong> {{ weeklyHabits.length }} This Week</strong>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let habits of weeklyHabits">
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >0 / {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button class="mx-2" *ngIf="habits.Goal > 1">
+                            <mat-icon>add</mat-icon>
+                            <span>1</span>
+                        </button>
+                        <button class="mx-2" *ngIf="habits.Goal == 1">
+                            <mat-icon>done</mat-icon>
+                            <span>Done</span>
+                        </button>
+                        <button>
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
     </div>
-    <div class="mt-1 demo">
-        <mat-icon style="color: orange">local_cafe</mat-icon>
-        <div class="bar-1"></div>
+    <div class="monthly" *ngIf="monthlyHabits.length > 0">
+        <mat-expansion-panel class="my-3">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong> {{ monthlyHabits.length }} This Month</strong>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let habits of monthlyHabits">
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >0 / {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button class="mx-2" *ngIf="habits.Goal > 1">
+                            <mat-icon>add</mat-icon>
+                            <span>1</span>
+                        </button>
+                        <button class="mx-2" *ngIf="habits.Goal == 1">
+                            <mat-icon>done</mat-icon>
+                            <span>Done</span>
+                        </button>
+                        <button>
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
     </div>
-    <h3 class="my-3">The Start of a Better You!</h3>
-    <p class="text-secondary">Habits are like dominos. As one is formed,</p>
-    <p class="text-secondary">all others will follow!</p>
-    <button class="my-2 active" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-        <span>Add Habits</span>
-    </button>
+    <div class="no-habits" *ngIf="Habits.length === 0">
+        <div class="mt-1 demo">
+            <mat-icon style="color: green">directions_bike</mat-icon>
+            <div class="bar-1"></div>
+        </div>
+        <div class="mt-1 demo">
+            <mat-icon color="primary">directions_run</mat-icon>
+            <div class="bar-1"></div>
+        </div>
+        <div class="mt-1 demo">
+            <mat-icon style="color: orange">local_cafe</mat-icon>
+            <div class="bar-1"></div>
+        </div>
+        <h3 class="my-3">The Start of a Better You!</h3>
+        <p class="text-secondary">Habits are like dominos. As one is formed,</p>
+        <p class="text-secondary">all others will follow!</p>
+        <button class="my-2 active" (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+            <span>Add Habits</span>
+        </button>
+    </div>
 </div>

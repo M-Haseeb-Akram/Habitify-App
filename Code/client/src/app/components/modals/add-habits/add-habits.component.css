@@ -6,7 +6,14 @@ h3 {
     display: flex;
     flex-direction: column;
 }
+input.ng-invalid.ng-dirty {
+    outline-color: red !important;
+    border: red 1px solid;
+}
 
+input:focus {
+    outline-color: blue !important;
+}
 mat-icon {
     padding: 5px;
     border: #e2e0e0 1px solid;
@@ -38,9 +45,6 @@ select:focus {
     padding: 5px;
     color: rgb(105, 104, 104);
 }
-input:focus {
-    outline-color: blue !important;
-}
 .footer {
     padding-left: 300px;
 }
@@ -52,8 +56,4 @@ input:focus {
 
 .main label {
     color: rgb(105, 104, 104);
-}
-input.ng-invalid.ng-dirty {
-    outline-color: red !important;
-    border: red 1px solid;
 }

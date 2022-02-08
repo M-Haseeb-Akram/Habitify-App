@@ -58,3 +58,12 @@ mat-icon {
 .dropdown button span {
     margin-left: 30px;
 }
+
+.search {
+    width: 130px !important;
+    border: grey !important;
+    margin-left: 5px !important;
+}
+.search:focus {
+    outline: transparent;
+}

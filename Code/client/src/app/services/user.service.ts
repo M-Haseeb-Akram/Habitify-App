@@ -16,7 +16,6 @@ export class UserService {
     private accessToken!: string;
     constructor(
         private httpClient: HttpClient,
-        private router: Router,
         private store: Store<AppState>) {
         this.store.select('auth').pipe(
             take(1),
@@ -26,12 +25,21 @@ export class UserService {
         ).subscribe(user => this.accessToken = user.accessToken);
     }
     // Create Todo
-    addHabit(newHabit: Habits): Observable<any> {
+    addHabit = (newHabit: Habits): Observable<any> => {
         const body = JSON.stringify(newHabit);
         const headers = { Authorization: this.accessToken, 'content-type': 'application/json' }
-        // console.log(this.accessToken);
         return this.httpClient.post<any>(
             `${PROXY_CONFIG.target}/api/user/add-habit`,body,
+            {
+                'headers': headers,
+            }
+        );
+    }
+
+    viewHabits = (): Observable<any> => {
+        const headers = { Authorization: this.accessToken }
+        return this.httpClient.get<any>(
+            `${PROXY_CONFIG.target}/api/user/get-habits`,
             {
                 'headers': headers,
             }

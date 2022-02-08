@@ -1,15 +1,5 @@
 import { User } from "src/app/models/user.model";
-import * as AuthActions from "../actions/auth.actions";
-// const user:User = {
-//     isAuthenticated: false,
-//     accessToken: '',
-//     user: {
-//         user_id: '',
-//         name: '',
-//         picture: '',
-//     },
-//     statusCode: 401
-// }
+import * as AuthActions from "../actions/auth.action";
 
 const user:User = {
     isAuthenticated: false,

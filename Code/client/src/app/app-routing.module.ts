@@ -1,3 +1,4 @@
+import { TestComponent } from './components/test/test.component';
 import { DataResolver } from './resolver/auth-data.resolver';
 import { LandingPageComponent } from './components/user/landing-page/landing-page.component';
 import { AuthGuardService } from './services/auth-gaurd.service';
@@ -8,13 +9,14 @@ import { AllHabitsComponent } from './components/user/all-habits/all-habits.comp
 
 const routes: Routes = [
     {path: '', component: GoogleAuthComponent},
-    // {path: 'test', component: TestComponent},
+
     {
         path: 'journal',
         canActivate: [AuthGuardService],
         component: LandingPageComponent,
         children: [
             { path: 'all-habits', component: AllHabitsComponent },
+            { path: 'time-of-day', component: AllHabitsComponent },
         ],
         resolve: {data: DataResolver}
     },

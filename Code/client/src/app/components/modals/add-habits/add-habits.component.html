@@ -60,10 +60,10 @@
                         style="width: 290px; margin-left: 0px !important"
                         formControlName="catagory"
                     >
-                        <option value="All" selected>Any Time</option>
-                        <option value="Morning">Morning</option>
-                        <option value="Afternoon">Afternoon</option>
-                        <option value="Evening">Evening</option>
+                        <option value="all" selected>Any Time</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
                     </select>
                 </div>
                 <div>
@@ -74,6 +74,7 @@
                         type="date"
                         style="width: 140px; margin-left: 10px"
                         value="{{ Today }}"
+                        min="{{ Today }}"
                         formControlName="start_date"
                     />
                 </div>

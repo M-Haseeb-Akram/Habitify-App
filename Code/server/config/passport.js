@@ -4,7 +4,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const dotenv = require('dotenv');
 dotenv.config();
-const User = require('../models/users.model');
+const User = require('../models/users_model');
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -18,21 +18,25 @@ passport.use(new GoogleStrategy(
         callbackURL: '/api/auth/callback',
         passReqToCallback: true,
     }, (request, accessToken, refreshToken, profile, done) => {
-        User.findOne({googleId: profile.id}).then((user) => {
+        User.findOne({googleId: profile.id}, async (err, user) => {
+            if (err) {
+                return done(err, null);
+            }
             if (user) {
                 return done(null, user);
             } else {
-                new User({
+                await new User({
                     googleId: profile.id,
                     Name: profile.displayName,
                     email: profile.emails[0].value,
                     picture: profile.picture,
-                }).save().then((newUser) => {
-                    return done(null, newUser);
+                }).save((error, newUser) => {
+                    if (!error) {
+                        return done(null, newUser);
+                    }
+                    return done(error, null);
                 });
             }
-        }).catch((err) => {
-            return done(err, null);
         });
     }),
 );

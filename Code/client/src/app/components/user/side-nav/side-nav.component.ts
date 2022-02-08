@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { LogOut } from 'src/app/store/actions/auth.actions';
+import { LogOut } from 'src/app/store/actions/auth.action';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 @Component({

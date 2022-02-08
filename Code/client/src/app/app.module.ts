@@ -17,6 +17,7 @@ import { HabitsProgressComponent } from './components/user/habits-progress/habit
 import { LandingPageComponent } from './components/user/landing-page/landing-page.component';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         HabitsProgressComponent,
         LandingPageComponent,
         AddHabitsComponent,
+        TestComponent,
     ],
     imports: [
         BrowserModule,

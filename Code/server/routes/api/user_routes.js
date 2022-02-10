@@ -26,5 +26,5 @@ router.delete(
 );
 
 
-router.get('/get-habits/', viewHabitController);
+router.get('/get-habits', viewHabitController);
 module.exports = router;

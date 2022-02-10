@@ -7,7 +7,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { MatDialogRef } from '@angular/material/dialog';
 import { take } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/state/app.state';
 
 @Component({
@@ -21,6 +21,7 @@ export class AddHabitsComponent implements OnInit {
     public habitsForm!: FormGroup;
     private newHabit!: Habits;
     private user_id!: string;
+    private count!: any;
     constructor(
       private userService: UserService,
       private store: Store<AppState>,
@@ -50,6 +51,7 @@ export class AddHabitsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
     }
     validateName = (control: AbstractControl): {[s:string]: boolean} | null => {
         if(!/^[a-zA-Z ]+$/.test(control.value)){
@@ -57,7 +59,7 @@ export class AddHabitsComponent implements OnInit {
         }
         return null;
     }
-    onAddHabit = () =>{
+    onAddHabit =  () =>{
         this.newHabit = {
             userId: this.user_id,
             Name: this.habitsForm.value.name,
@@ -69,14 +71,12 @@ export class AddHabitsComponent implements OnInit {
             catagory: this.habitsForm.value.catagory ?? "all",
             progress: []
         }
-        this.userService.addHabit(this.newHabit).subscribe(
-            (res) => {
-                this.store.dispatch(new Add_Habits(this.newHabit));
-                this.onNoClick();
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        this.userService.addHabit(this.newHabit).subscribe((res)=>{
+            this.store.dispatch(new Add_Habits(res.newHabit));
+            this.onNoClick()
+
+        },err => {
+            console.log(err.error);
+        });
     }
 }

@@ -1,4 +1,3 @@
-import { appReducer } from './store/reducers/app.reducer';
 import { AddHabitsComponent } from './components/modals/add-habits/add-habits.component';
 import { BrowserXhr } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -18,6 +17,7 @@ import { LandingPageComponent } from './components/user/landing-page/landing-pag
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestComponent } from './components/test/test.component';
+import { appReducer } from './store/reducers/app.reducer';
 
 @NgModule({
     declarations: [

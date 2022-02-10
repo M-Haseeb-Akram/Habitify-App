@@ -5,10 +5,10 @@ export interface State{
   habits: Habits[],
 }
 const initialState: State = {
-    habits: []
+    habits: [],
 }
 
-export const HabitsReducers = (state:State = initialState, action: HabitsActions.All) => {
+export const HabitsReducers = (state:State = initialState, action: HabitsActions.Habit) => {
     switch (action.type) {
     case HabitsActions.HabitsActionTypes.EXISTING_HABITS: {
         return {
@@ -17,9 +17,9 @@ export const HabitsReducers = (state:State = initialState, action: HabitsActions
         };
     }
     case HabitsActions.HabitsActionTypes.ADD_HABITS: {
+        const newHabits = state.habits;
         return {
-            ...state,
-            habits: [...state.habits, action.payload]
+            habits: [...newHabits, action.payload]
         };
     }
     default: {

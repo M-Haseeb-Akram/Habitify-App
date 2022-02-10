@@ -3,7 +3,7 @@ const Habits = require('../models/habits_model');
 
 const addHabitController = async (req, res) => {
     try {
-        const {userId, Name, Goal, schedual, repeat, startDate, streak, catagory} = req.body;
+        const {userId, Name, Goal, schedual, repeat, startDate, streak, catagory} = req.body.habit;
         await new Habits({
             userId: userId,
             Name: Name,
@@ -53,7 +53,7 @@ const deleteHabitController = async (req, res) => {
     try {
         const {id} = req.params.id;
         console.log(id);
-        await Habits.remove({where: {'_id': `${id}`, 'userId': req.user.id}});
+        await Habits.deleteOne({where: {'_id': `${id}`, 'userId': req.user.id}});
         res.status(200).json({
             message: 'Habit is deleted successfully',
             statusCode: 200,
@@ -70,18 +70,25 @@ const deleteHabitController = async (req, res) => {
 const editHabitController = async (req, res) => {
     try {
         const {id} = req.params;
-        const {userId, Name, Goal, schedual, repeat, startDate, streak, catagory} = req.body;
-        await Habits.update({
-            userId: userId,
-            Name: Name,
-            Goal: Goal,
-            schedual: schedual,
-            repeat: repeat,
-            start_date: startDate,
-            streak: streak,
-            catagory: catagory,
-        },
-        {where: {_id: id, userId: req.user.id}});
+        const {Name, Goal, schedual, repeat, startDate, catagory} = req.body;
+        const data = await Habits.update(
+            {_id: id, userId: req.user.id},
+            {
+                $set: {
+                    Name: Name,
+                    Goal: Goal,
+                    schedual: schedual,
+                    repeat: repeat,
+                    start_date: startDate,
+                    catagory: catagory,
+                },
+            },
+        );
+        res.status(200).json({
+            message: 'Updated Successfully!',
+            data: data,
+            statusCode: 200,
+        });
     } catch (error) {
         res.status(400).json({
             message: 'Error occured!',

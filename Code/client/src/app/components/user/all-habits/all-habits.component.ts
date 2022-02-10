@@ -1,5 +1,5 @@
 import { Add_Habits } from './../../../store/actions/habits.action';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { UserService } from './../../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,6 +25,7 @@ export class AllHabitsComponent implements OnInit {
     public weeklyHabits!: Habits[];
     public monthlyHabits!: Habits[];
     public param!: string;
+    private count!: any
     constructor(private titleService: Title,
         private dialog: MatDialog,
         private route: ActivatedRoute,
@@ -46,13 +47,11 @@ export class AllHabitsComponent implements OnInit {
             data: {}
         });
     }
-    ngOnInit(): void {
-        let count = 1;
-        this.userService.viewHabits().subscribe(
-            (res) => {
-                this.store.dispatch(new User_Habits(res.habits));
-            },
-        );
+    ngOnInit(): void {let count = 1;
+        this.userService.viewHabits().subscribe((res:any) => {
+            this.store.dispatch(new User_Habits(res.habits));
+            console.log('object');
+        });
         this.route.url.subscribe( params => {
             this.param = params[0].path;
             this.store.select('user').pipe(
@@ -65,14 +64,13 @@ export class AllHabitsComponent implements OnInit {
             })
         });
         this.store.select('user').pipe(
-            take(1),
             map(userState => {
                 return userState.habits
             })
         ).subscribe(user => {
             this.handleHabitsCatagories(user);
-            console.log(count++);
-        })
+            console.log(++count);
+        });
     }
 
 

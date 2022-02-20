@@ -7,9 +7,7 @@ const app = express();
 const passport = require('passport');
 const routes = require('./routes/index');
 const cookieParser = require('cookie-parser');
-// const cron = require('node-cron');
-// const test = require('./node-cron/cron-ping');
-// const { send } = require('process');
+
 
 app.use(cors());
 app.use(passport.initialize());

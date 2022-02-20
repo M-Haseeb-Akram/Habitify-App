@@ -2,7 +2,6 @@ import { LogIn } from 'src/app/store/actions/auth.action';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { AppState } from '../store/state/app.state';
 
 
@@ -11,7 +10,6 @@ import { AppState } from '../store/state/app.state';
 })
 export class DataResolver {
     constructor(private store: Store<AppState>,
-                private activatedRoute: ActivatedRoute,
                 private cookieService: CookieService) { }
 
     resolve() {

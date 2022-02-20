@@ -12,7 +12,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgModule } from '@angular/core';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const MaterialComponents = [
@@ -30,6 +32,8 @@ const MaterialComponents = [
     MatMenuModule,
     MatIconModule,
     MatExpansionModule,
+    MatCheckboxModule,
+    MatNativeDateModule
 ]
 
 @NgModule({

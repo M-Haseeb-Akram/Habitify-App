@@ -22,6 +22,27 @@ export const HabitsReducers = (state:State = initialState, action: HabitsActions
             habits: [...newHabits, action.payload]
         };
     }
+    case HabitsActions.HabitsActionTypes.DELETE_HABIT: {
+        return {
+            ...state,
+            habits: state.habits.filter(habits => {
+                return habits._id !== action.payload;
+            })
+        }
+    }
+    case HabitsActions.HabitsActionTypes.UPDATE_HABIT: {
+        const updatedHabits = [...state.habits];
+        for (let index = 0; index < state.habits.length; index++) {
+            if( state.habits[index]._id === action.payload.id) {
+                updatedHabits[index] = action.payload.habit;
+                break;
+            }
+        }
+        return {
+            ...state,
+            habits: updatedHabits
+        }
+    }
     default: {
         return state;
     }

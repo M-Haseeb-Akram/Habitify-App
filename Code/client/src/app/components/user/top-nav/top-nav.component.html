@@ -9,54 +9,91 @@
                 class="search"
                 placeholder="Search"
                 #input
-                (focusout)="search = false"
+                (focusout)="cancelSearch()"
+                [ngModel]="userService.filterString | async"
+                (ngModelChange)="userService.filterString.next($event)"
             />
         </button>
-        <button>
+        <button (click)="picker.open()">
             <mat-icon>calendar_today</mat-icon>
-            <span class="px-1" *ngIf="!search">Today</span>
+            <input
+                [matDatepicker]="picker"
+                class="px-1"
+                style="width: 80px; border: none; outline: none"
+                *ngIf="!search"
+                [ngModel]="userService.datePicker | async"
+                (ngModelChange)="userService.datePicker.next($event)"
+            />
+            <mat-datepicker #picker> </mat-datepicker>
             <mat-icon *ngIf="!search">arrow_drop_down</mat-icon>
         </button>
         <button #sortTrigger="matMenuTrigger" [matMenuTriggerFor]="sorting">
             <mat-icon>sort</mat-icon>
-            <span class="px-1" *ngIf="!search">Albhabeticall</span>
+            <span class="px-1" *ngIf="!search">Albhabetical</span>
             <mat-icon *ngIf="!search">arrow_drop_down</mat-icon>
         </button>
         <mat-menu #sorting="matMenu" [overlapTrigger]="false" class="mt-2">
             <div class="dropdown">
-                <button mat-fab class="menu-button">
+                <button mat-menu-item>
                     <mat-icon></mat-icon>
-                    <span>Reminder Time</span>
+                    Reminder Time
                 </button>
-                <button mat-fab class="menu-button">
-                    <mat-icon></mat-icon>
-                    <span>My Habits Order</span>
+                <button mat-menu-item (click)="setSortingIndex('my-habits')">
+                    <mat-icon
+                        [style.visibility]="
+                            sortingInedex === 'my-habits' ? 'visible' : 'hidden'
+                        "
+                        >done</mat-icon
+                    >
+                    My Habits Order
                 </button>
                 <button
-                    mat-fab
-                    class="menu-button"
+                    mat-menu-item
                     [matMenuTriggerFor]="subAlphabet"
                     #alphabetsTrigger="matMenuTrigger"
                     (mouseover)="alphabetsTrigger.openMenu()"
                 >
-                    <mat-icon></mat-icon>
+                    <mat-icon
+                        [style.visibility]="
+                            sortingInedex !== 'my-habits' ? 'visible' : 'hidden'
+                        "
+                        >done</mat-icon
+                    >
                     <span>Alphabetical</span>
-                    <mat-icon>arrow_right</mat-icon>
                 </button>
                 <mat-menu
                     #subAlphabet="matMenu"
                     [overlapTrigger]="false"
                     class="ml-1"
-                    xPosition="before"
                 >
                     <div class="dropdown">
-                        <button mat-fab class="menu-button">
-                            <mat-icon></mat-icon>
-                            <span>A-Z</span>
+                        <button
+                            mat-menu-item
+                            (click)="setSortingIndex('ascending')"
+                        >
+                            <mat-icon
+                                [style.visibility]="
+                                    sortingInedex === 'ascending'
+                                        ? 'visible'
+                                        : 'hidden'
+                                "
+                                >done</mat-icon
+                            >
+                            A-Z
                         </button>
-                        <button mat-fab class="menu-button">
-                            <mat-icon></mat-icon>
-                            <span>Z-A</span>
+                        <button
+                            mat-menu-item
+                            (click)="setSortingIndex('descending')"
+                        >
+                            <mat-icon
+                                [style.visibility]="
+                                    sortingInedex === 'descending'
+                                        ? 'visible'
+                                        : 'hidden'
+                                "
+                                >done</mat-icon
+                            >
+                            Z-A
                         </button>
                     </div>
                 </mat-menu>
@@ -73,21 +110,26 @@
         </button>
         <mat-menu #addHabit="matMenu" [overlapTrigger]="false" class="mt-2">
             <div class="dropdown">
-                <button mat-fab class="menu-button" (click)="openDialog()">
+                <button mat-menu-item (click)="openDialog()">
                     <mat-icon>all_inclusive</mat-icon>
-                    <span>Create Good Habit</span>
+                    Create Good Habit
                 </button>
-                <button mat-fab class="menu-button">
+                <button mat-menu-item>
                     <mat-icon>block</mat-icon>
-                    <span>Break Bad Habit</span>
+                    Break Bad Habit
                 </button>
                 <mat-divider></mat-divider>
-                <button mat-fab class="menu-button">
+                <button mat-menu-item>
                     <mat-icon>add</mat-icon>
-                    <span>Log Mood</span>
-                    <mat-icon>arrow_right</mat-icon>
+                    Log Mood
                 </button>
             </div>
         </mat-menu>
     </div>
 </div>
+
+<mat-menu #dateMenu="matMenu" [overlapTrigger]="false">
+    <ng-template matContent>
+        <mat-datepicker #picker> </mat-datepicker>
+    </ng-template>
+</mat-menu>

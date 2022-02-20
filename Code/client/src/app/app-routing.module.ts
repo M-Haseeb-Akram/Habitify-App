@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GoogleAuthComponent } from './components/auth/google-auth/google-auth.component';
 import { AllHabitsComponent } from './components/user/all-habits/all-habits.component';
+import { ManageHabitsComponent } from './components/user/manage-habits/manage-habits.component';
 
 const routes: Routes = [
     {path: '', component: GoogleAuthComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
         children: [
             { path: 'all-habits', component: AllHabitsComponent },
             { path: 'time-of-day', component: AllHabitsComponent },
+            { path: 'manage-habits', component: ManageHabitsComponent },
         ],
         resolve: {data: DataResolver}
     },

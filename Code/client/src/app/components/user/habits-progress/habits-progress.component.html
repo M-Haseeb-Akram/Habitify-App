@@ -1,1 +1,74 @@
-<h5>habits-progress works!</h5>
+<div class="main">
+    <div class="top-menu">
+        <div class="top-buttons">
+            <button>
+                <mat-icon>zoom_out_map</mat-icon>
+            </button>
+            <strong class="mx-2">{{ habit.Name }}</strong>
+        </div>
+        <div class="top-buttons">
+            <button class="mx-2">
+                <mat-icon>calendar_today</mat-icon>
+                <span> February, 2022</span>
+                <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <button>
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button class="mx-2">
+                <mat-icon>assignment_return</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row mx-1">
+        <div class="col streak">
+            <div class="mt-1">
+                <mat-icon style="color: #e25822; font-size: 45px"
+                    >whatshot</mat-icon
+                >
+            </div>
+            <div class="mx-4 mt-1">
+                <h4 class="text-secondary"><strong>CURRENT STREAK</strong></h4>
+                <h2>
+                    <strong>{{ habit.streak }} days</strong>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-1" style="column-gap: 5px">
+        <div class="col half">
+            <div class="status">
+                <mat-icon>done</mat-icon>
+                <h5 class="text-secondary"><strong>COMPLETE</strong></h5>
+            </div>
+            <h2 class="mx-2"><strong>0 days</strong></h2>
+            <strong class="mx-2">------</strong>
+        </div>
+        <div class="col half">
+            <div class="status">
+                <mat-icon>close</mat-icon>
+                <h5 class="text-secondary"><strong>FAIL</strong></h5>
+            </div>
+            <h2 class="mx-2"><strong>0 days</strong></h2>
+            <strong class="mx-2">------</strong>
+        </div>
+    </div>
+    <div class="row mx-1 mt-2" style="column-gap: 5px">
+        <div class="col half">
+            <div class="status">
+                <mat-icon>arrow_right_alt</mat-icon>
+                <h5 class="text-secondary"><strong>SKIP</strong></h5>
+            </div>
+            <h2 class="mx-2"><strong>0 days</strong></h2>
+            <strong class="mx-2">------</strong>
+        </div>
+        <div class="col half">
+            <div class="status">
+                <h5 class="text-secondary"><strong>TOTAL</strong></h5>
+            </div>
+            <h2 class="mx-2"><strong>0 times</strong></h2>
+            <strong class="mx-2">------</strong>
+        </div>
+    </div>
+</div>

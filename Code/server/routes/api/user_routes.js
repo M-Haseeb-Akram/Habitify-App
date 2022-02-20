@@ -4,27 +4,34 @@ const {
     addHabitController,
     viewHabitController,
     deleteHabitController,
-    editHabitController} = require('../../controller/user_controller');
+    editHabitController,
+    getSingleHabit,
+    editHabitCatagoryController} = require('../../controller/user_controller');
 const {addHabitMiddleware} = require('../../middleware/user_middleware');
 
 
 router.post(
-    '/add-habit',
+    '/habit',
     addHabitMiddleware,
     addHabitController,
 );
 
 router.patch(
-    '/update-habit/:id',
+    '/habit/:id',
     addHabitMiddleware,
     editHabitController,
 );
 
+router.patch(
+    '/habit/catagory/:id',
+    editHabitCatagoryController,
+);
 router.delete(
-    '/delete-habit/:id',
+    '/habit/:id',
     deleteHabitController,
 );
 
 
-router.get('/get-habits', viewHabitController);
+router.get('/habits', viewHabitController);
+router.get('/habit/:id', getSingleHabit);
 module.exports = router;

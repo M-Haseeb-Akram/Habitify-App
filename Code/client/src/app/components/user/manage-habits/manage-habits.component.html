@@ -1,0 +1,233 @@
+<div class="main">
+    <div class="catagories">
+        <div class="sidenav-container">
+            <h3>Manage Habits</h3>
+            <mat-divider></mat-divider>
+            <div class="mt-4">
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('all', 'active')"
+                    [ngClass]="{ active: active === 'active' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>inbox</mat-icon>
+                        <span>Active</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ anyTimeHabits.length }}</span>
+                    </div>
+                </button>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('archived', 'archived')"
+                    [ngClass]="{ active: active === 'archived' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>inbox</mat-icon>
+                        <span>Archived</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ archivedHabits.length }}</span>
+                    </div>
+                </button>
+                <p class="text-secondary mt-3 mb-1">TIME OF DAY</p>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('all', 'anyTime')"
+                    [ngClass]="{ active: active === 'anyTime' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>inbox</mat-icon>
+                        <span>Any Time</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ anyTimeHabits.length }}</span>
+                    </div>
+                </button>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('morning', 'morning')"
+                    [ngClass]="{ active: active === 'morning' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>wb_sunny</mat-icon>
+                        <span>Morning</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ morningHabits.length }}</span>
+                    </div>
+                </button>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('afternoon', 'afternoon')"
+                    [ngClass]="{ active: active === 'afternoon' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>wb_sunny</mat-icon>
+                        <span>Afternoon</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ afternoonHabits.length }}</span>
+                    </div>
+                </button>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('evening', 'evening')"
+                    [ngClass]="{ active: active === 'evening' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>brightness_3</mat-icon>
+                        <span>Evening</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ eveningHabits.length }}</span>
+                    </div>
+                </button>
+                <p class="text-secondary mt-3 mb-1">AREAS</p>
+                <button
+                    mat-fab
+                    class="menu-button"
+                    (click)="manageHabits('uncatogorize', 'uncatogorize')"
+                    [ngClass]="{ active: active === 'uncatogorize' }"
+                >
+                    <div class="menu-title">
+                        <mat-icon>inbox</mat-icon>
+                        <span>Uncatogorized</span>
+                    </div>
+                    <div>
+                        <span class="dot">{{ anyTimeHabits.length }}</span>
+                    </div>
+                </button>
+                <button mat-fab class="menu-button">
+                    <div class="menu-title">
+                        <mat-icon>folder</mat-icon>
+                        <span>Lahore</span>
+                    </div>
+                    <div>
+                        <span class="dot">0</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="habits px-2">
+        <div class="results mt-3">
+            <h3>Habits</h3>
+            <div class="search">
+                <mat-icon>search</mat-icon>
+                <input
+                    type="search"
+                    placeholder="Search"
+                    class="search-input"
+                    [ngModel]="userService.filterString | async"
+                    (ngModelChange)="userService.filterString.next($event)"
+                />
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div
+            class="mt-2"
+            *ngFor="
+                let habits of HabitsToShow | completeFilter: searchFor:'Name'
+            "
+        >
+            <div
+                class="results"
+                [matMenuTriggerFor]="habitMenu"
+                [matMenuTriggerData]="{ habitId: habits._id }"
+            >
+                <div class="title">
+                    <mat-icon svgIcon="question_mark"></mat-icon>
+                    <strong class="mx-2">{{ habits.Name }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-menu #habitMenu="matMenu">
+    <ng-template matMenuContent let-habitId="habitId">
+        <div class="dropdown">
+            <button
+                mat-menu-item
+                (click)="userService.setProgressMode(habitId)"
+            >
+                <mat-icon>pie_chart</mat-icon>
+                View Progress
+            </button>
+            <button mat-menu-item (click)="userService.setEditMode(habitId)">
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <button
+                mat-menu-item
+                (click)="userService.onUpdateHabitCatagory(habitId, 'archived')"
+            >
+                <mat-icon>archive</mat-icon>
+                Archive
+            </button>
+            <button
+                mat-menu-item
+                (click)="userService.openDeleteDialog(habitId)"
+            >
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
+            <mat-divider></mat-divider>
+            <button
+                mat-menu-item
+                #dispatchPlanmenuTrigger="matMenuTrigger"
+                [matMenuTriggerFor]="dispatchCatagory"
+                [matMenuTriggerData]="{ habitId: habitId }"
+                (mouseover)="dispatchPlanmenuTrigger.openMenu()"
+            >
+                <mat-icon></mat-icon>
+                Move to..
+            </button>
+        </div>
+    </ng-template>
+</mat-menu>
+
+<mat-menu #dispatchCatagory="matMenu">
+    <ng-template matMenuContent let-habitId="habitId">
+        <div class="dropdown">
+            <button
+                mat-menu-item
+                (click)="userService.onUpdateHabitCatagory(habitId, 'morning')"
+            >
+                <mat-icon>wb_sunny</mat-icon>
+                Morning
+            </button>
+            <button
+                mat-menu-item
+                (click)="
+                    userService.onUpdateHabitCatagory(habitId, 'afternoon')
+                "
+            >
+                <mat-icon>wb_sunny</mat-icon>
+                Afternoon
+            </button>
+            <button
+                mat-menu-item
+                (click)="userService.onUpdateHabitCatagory(habitId, 'evening')"
+            >
+                <mat-icon>brightness_3</mat-icon>
+                Evening
+            </button>
+            <mat-divider></mat-divider>
+            <div class="px-2">
+                <p class="text-secondary">AREAS</p>
+            </div>
+            <button mat-menu-item>
+                <mat-icon>folder</mat-icon>
+                Lahore
+            </button>
+        </div>
+    </ng-template>
+</mat-menu>

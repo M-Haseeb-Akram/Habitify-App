@@ -1,4 +1,3 @@
-import { appReducer } from './store/reducers/app.reducer';
 import { AddHabitsComponent } from './components/modals/add-habits/add-habits.component';
 import { BrowserXhr } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -17,6 +16,16 @@ import { HabitsProgressComponent } from './components/user/habits-progress/habit
 import { LandingPageComponent } from './components/user/landing-page/landing-page.component';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TestComponent } from './components/test/test.component';
+import { appReducer } from './store/reducers/app.reducer';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortPipe } from './pipes/sort.pipe';
+import { DeleteConfirmationComponent } from './components/modals/delete-confirmation/delete-confirmation.component';
+import { ManageHabitsComponent } from './components/user/manage-habits/manage-habits.component';
+import { CompleteFilterPipe } from './pipes/complete-filter.pipe';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DatePickerPipe } from './pipes/date-picker.pipe';
 
 @NgModule({
     declarations: [
@@ -28,6 +37,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         HabitsProgressComponent,
         LandingPageComponent,
         AddHabitsComponent,
+        TestComponent,
+        FilterPipe,
+        SortPipe,
+        DeleteConfirmationComponent,
+        ManageHabitsComponent,
+        CompleteFilterPipe,
+        DatePickerPipe,
     ],
     imports: [
         BrowserModule,
@@ -41,7 +57,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ],
     providers: [
         {provide: BrowserXhr},
-        CookieService
+        CookieService,
+        {
+            provide: MatDialogRef,
+            useValue: {}
+        },
+        MatDatepickerModule
     ],
     bootstrap: [AppComponent]
 })

@@ -1,18 +1,20 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 80%;
+    display: flex;
+    flex-direction: column;
     font-size: small;
     font-family: sans-serif;
 }
+
 .no-habits {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 250px;
 }
 button {
     background-color: transparent;
@@ -47,4 +49,50 @@ mat-icon {
     margin-left: 1px !important;
     height: 15px;
     border-radius: 4px;
+}
+
+.habits {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.status-action {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+}
+
+.question_icon {
+    margin-top: 5px;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+}
+.dropdown button {
+    padding: 7px 30px 8px 7px;
+    background-color: transparent;
+    color: rgb(122, 123, 124);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    height: 30px !important;
+    font-size: small;
+}
+.dropdown button:hover {
+    background-color: #0000ff !important;
+    color: white !important;
+    border-radius: 0px !important;
+}
+.dropdown button span {
+    margin-left: 20px;
+    float: right !important;
 }

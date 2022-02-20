@@ -1,0 +1,46 @@
+.top-menu {
+    padding: 7px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50px !important;
+}
+
+.top-menu button {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    border: #e2e0e0 1px solid;
+    border-radius: 4px;
+    height: 30px;
+    padding: 3px 3px 0px 2px;
+    font-weight: bold;
+    color: rgb(94, 95, 95);
+}
+.top-buttons {
+    display: flex;
+    flex-direction: row;
+}
+mat-icon {
+    font-size: 18px;
+}
+.streak {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: #bebdbd 1px solid;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+}
+.status {
+    display: flex;
+    flex-direction: row;
+}
+
+.half {
+    border: #bebdbd 1px solid;
+    border-radius: 20px;
+    padding: 10px;
+    /* margin-left: 1-px; */
+}

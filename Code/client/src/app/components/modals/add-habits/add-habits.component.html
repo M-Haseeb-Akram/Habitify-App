@@ -1,4 +1,5 @@
-<div class="main">
+<div class="main" *ngIf="isLoading"></div>
+<div class="main" *ngIf="!isLoading">
     <h3 mat-dialog-title>New Habit</h3>
     <form [formGroup]="habitsForm" (ngSubmit)="onAddHabit()">
         <div mat-dialog-content>
@@ -33,9 +34,12 @@
                         style="margin-top: 25px; width: 90px"
                         formControlName="schedual"
                     >
-                        <option value="1" selected>Per Day</option>
-                        <option value="7">Per Week</option>
-                        <option value="31">Per Month</option>
+                        <option
+                            *ngFor="let schedual of schedualOption"
+                            [value]="schedual.value"
+                        >
+                            {{ schedual.title }}
+                        </option>
                     </select>
                 </div>
                 <div>
@@ -46,10 +50,11 @@
                         name="repeat"
                         style="width: 140px"
                         formControlName="repeat"
-                    >
-                        <option value="Daily" selected>Daily</option>
-                        <option value="Monthly">Monthly</option>
-                    </select>
+                        #habitRepeatmenuTrigger="matMenuTrigger"
+                        [matMenuTriggerFor]="habitRepeat"
+                        (focus)="habitRepeatmenuTrigger.openMenu()"
+                        (change)="(formattedSelectedDays)"
+                    ></select>
                 </div>
             </div>
             <div class="fields mt-2">
@@ -60,10 +65,12 @@
                         style="width: 290px; margin-left: 0px !important"
                         formControlName="catagory"
                     >
-                        <option value="All" selected>Any Time</option>
-                        <option value="Morning">Morning</option>
-                        <option value="Afternoon">Afternoon</option>
-                        <option value="Evening">Evening</option>
+                        <option
+                            *ngFor="let catagory of catagoryOption"
+                            [value]="catagory.value"
+                        >
+                            {{ catagory.title }}
+                        </option>
                     </select>
                 </div>
                 <div>
@@ -73,7 +80,6 @@
                     <input
                         type="date"
                         style="width: 140px; margin-left: 10px"
-                        value="{{ Today }}"
                         formControlName="start_date"
                     />
                 </div>
@@ -86,22 +92,72 @@
             </div>
         </div>
 
-        <div mat-dialog-actions class="footer">
-            <button
-                mat-button
-                (click)="onNoClick()"
-                class="btn btn-secondary mx-2"
+        <div class="footer">
+            <div
+                class="actionsForUpdate"
+                [style.visibility]="editMode ? 'visible' : 'hidden'"
             >
-                Cancel
-            </button>
-            <button
-                mat-button
-                [disabled]="!habitsForm.valid"
-                class="btn btn-primary"
-                type="submit"
-            >
-                Save
-            </button>
+                <button
+                    mat-button
+                    class="btn btn-light mx-2 text-danger"
+                    type="button"
+                    (click)="userService.openDeleteDialog(editModeId)"
+                >
+                    Delete
+                </button>
+                <button
+                    mat-button
+                    class="btn btn-light text-dark"
+                    type="button"
+                    (click)="
+                        userService.onUpdateHabitCatagory(
+                            editModeId,
+                            'archived'
+                        )
+                    "
+                >
+                    Archive
+                </button>
+            </div>
+            <div class="actionsForUpdate">
+                <button
+                    mat-button
+                    mat-dialog-close
+                    (click)="userService.onNoClick()"
+                    class="btn btn-light mx-2"
+                    type="button"
+                >
+                    Cancel
+                </button>
+                <button
+                    mat-button
+                    [disabled]="!habitsForm.valid"
+                    class="btn btn-primary"
+                    type="submit"
+                >
+                    Save
+                </button>
+            </div>
         </div>
     </form>
 </div>
+
+<mat-menu #habitRepeat="matMenu" class="repeat-menu mt-1">
+    <div class="dropdown">
+        <button mat-menu-item class="px-2" [matMenuTriggerFor]="habitDaily">
+            Daily
+        </button>
+        <button mat-menu-item class="px-2">Monthly</button>
+    </div>
+</mat-menu>
+
+<mat-menu #habitDaily="matMenu" class="repeat-menu mt-1">
+    <mat-checkbox
+        *ngFor="let item of weekDays; let i = index"
+        [(ngModel)]="item.activated"
+        (click)="$event.stopPropagation()"
+        (change)="onDaySelect()"
+        class="px-2 week"
+        >{{ item.title }}</mat-checkbox
+    >
+</mat-menu>

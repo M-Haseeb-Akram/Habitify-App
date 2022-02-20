@@ -2,8 +2,8 @@
 const router = require('express').Router();
 require('../../config/passport');
 const passport = require('passport');
-const {loginController} = require('../../controller/auth.controller');
-const {loginMiddleware} = require('../../middleware/auth.middleware');
+const {loginController} = require('../../controller/auth_controller');
+const {loginMiddleware} = require('../../middleware/auth_middleware');
 
 
 // Login Route

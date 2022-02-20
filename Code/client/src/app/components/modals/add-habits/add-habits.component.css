@@ -6,7 +6,18 @@ h3 {
     display: flex;
     flex-direction: column;
 }
+input.ng-invalid.ng-dirty {
+    outline-color: red !important;
+    border: red 1px solid;
+}
 
+::ng-deep .repeat-menu {
+    width: 140px;
+}
+
+input:focus {
+    outline-color: blue !important;
+}
 mat-icon {
     padding: 5px;
     border: #e2e0e0 1px solid;
@@ -31,6 +42,23 @@ mat-icon {
 select:focus {
     outline-color: blue !important;
 }
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+    background-color: transparent !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: transparent !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: transparent !important;
+}
+::ng-deep .mat-checkbox-frame {
+    border: 0px solid !important;
+}
+::ng-deep .mat-checkbox-checked .mat-checkbox-checkmark-path {
+    stroke: black !important;
+}
 .main input {
     height: 25px;
     border: #e2e0e0 1px solid;
@@ -38,11 +66,11 @@ select:focus {
     padding: 5px;
     color: rgb(105, 104, 104);
 }
-input:focus {
-    outline-color: blue !important;
-}
 .footer {
-    padding-left: 300px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
 }
 .fields {
     display: flex;
@@ -53,7 +81,8 @@ input:focus {
 .main label {
     color: rgb(105, 104, 104);
 }
-input.ng-invalid.ng-dirty {
-    outline-color: red !important;
-    border: red 1px solid;
+
+.actionsForUpdate {
+    display: flex;
+    flex-direction: row;
 }

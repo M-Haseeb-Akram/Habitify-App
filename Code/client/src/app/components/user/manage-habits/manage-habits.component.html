@@ -8,7 +8,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('all', 'active')"
-                    [ngClass]="{ active: active === 'active' }"
+                    [ngClass]="{ active: activeMenu === 'active' }"
                 >
                     <div class="menu-title">
                         <mat-icon>inbox</mat-icon>
@@ -22,7 +22,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('archived', 'archived')"
-                    [ngClass]="{ active: active === 'archived' }"
+                    [ngClass]="{ active: activeMenu === 'archived' }"
                 >
                     <div class="menu-title">
                         <mat-icon>inbox</mat-icon>
@@ -37,7 +37,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('all', 'anyTime')"
-                    [ngClass]="{ active: active === 'anyTime' }"
+                    [ngClass]="{ active: activeMenu === 'anyTime' }"
                 >
                     <div class="menu-title">
                         <mat-icon>inbox</mat-icon>
@@ -51,7 +51,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('morning', 'morning')"
-                    [ngClass]="{ active: active === 'morning' }"
+                    [ngClass]="{ active: activeMenu === 'morning' }"
                 >
                     <div class="menu-title">
                         <mat-icon>wb_sunny</mat-icon>
@@ -65,7 +65,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('afternoon', 'afternoon')"
-                    [ngClass]="{ active: active === 'afternoon' }"
+                    [ngClass]="{ active: activeMenu === 'afternoon' }"
                 >
                     <div class="menu-title">
                         <mat-icon>wb_sunny</mat-icon>
@@ -79,7 +79,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('evening', 'evening')"
-                    [ngClass]="{ active: active === 'evening' }"
+                    [ngClass]="{ active: activeMenu === 'evening' }"
                 >
                     <div class="menu-title">
                         <mat-icon>brightness_3</mat-icon>
@@ -94,7 +94,7 @@
                     mat-fab
                     class="menu-button"
                     (click)="manageHabits('uncatogorize', 'uncatogorize')"
-                    [ngClass]="{ active: active === 'uncatogorize' }"
+                    [ngClass]="{ active: activeMenu === 'uncatogorize' }"
                 >
                     <div class="menu-title">
                         <mat-icon>inbox</mat-icon>
@@ -125,8 +125,8 @@
                     type="search"
                     placeholder="Search"
                     class="search-input"
-                    [ngModel]="userService.filterString | async"
-                    (ngModelChange)="userService.filterString.next($event)"
+                    [ngModel]="msgService.filterString | async"
+                    (ngModelChange)="msgService.filterString.next($event)"
                 />
             </div>
         </div>
@@ -154,14 +154,11 @@
 <mat-menu #habitMenu="matMenu">
     <ng-template matMenuContent let-habitId="habitId">
         <div class="dropdown">
-            <button
-                mat-menu-item
-                (click)="userService.setProgressMode(habitId)"
-            >
+            <button mat-menu-item (click)="msgService.setProgressMode(habitId)">
                 <mat-icon>pie_chart</mat-icon>
                 View Progress
             </button>
-            <button mat-menu-item (click)="userService.setEditMode(habitId)">
+            <button mat-menu-item (click)="msgService.setEditMode(habitId)">
                 <mat-icon>edit</mat-icon>
                 Edit
             </button>
@@ -174,7 +171,7 @@
             </button>
             <button
                 mat-menu-item
-                (click)="userService.openDeleteDialog(habitId)"
+                (click)="msgService.openDeleteDialog(habitId)"
             >
                 <mat-icon>delete</mat-icon>
                 Delete

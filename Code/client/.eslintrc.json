@@ -13,8 +13,12 @@
     "rules": {
         "no-console": "off",
         "no-empty": 0,
+        "@typescript-eslint/no-explicit-any": "off",
         "no-irregular-whitespace": 0,
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@angular-eslint/no-empty-lifecycle-method": "off"
     },
     "settings": {
         "angular": {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppState } from 'src/app/store/state/app.state';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';

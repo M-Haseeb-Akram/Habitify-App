@@ -47,7 +47,7 @@ export class SideNavComponent implements OnInit {
             this.time = "Morning";
             this.timeIcon = "wb_sunny";
         }
-        else if (hours >= 12 && hours < 17) {
+        else if (hours >= 12 && hours < 18) {
             this.time = "Afternoon";
             this.timeIcon = "wb_sunny";
         }

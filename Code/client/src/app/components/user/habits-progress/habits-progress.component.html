@@ -4,15 +4,15 @@
             <button>
                 <mat-icon>zoom_out_map</mat-icon>
             </button>
-            <strong class="mx-2">{{ habit.Name }}</strong>
+            <strong class="mx-2">{{ habit[0].Name }}</strong>
         </div>
         <div class="top-buttons">
             <button class="mx-2">
                 <mat-icon>calendar_today</mat-icon>
-                <span> February, 2022</span>
+                <span> {{ startDate }}</span>
                 <mat-icon>arrow_drop_down</mat-icon>
             </button>
-            <button>
+            <button (click)="msgService.setEditMode(habit[0]._id)">
                 <mat-icon>edit</mat-icon>
             </button>
             <button class="mx-2">
@@ -31,7 +31,7 @@
             <div class="mx-4 mt-1">
                 <h4 class="text-secondary"><strong>CURRENT STREAK</strong></h4>
                 <h2>
-                    <strong>{{ habit.streak }} days</strong>
+                    <strong>{{ habit[0].streak }} days</strong>
                 </h2>
             </div>
         </div>
@@ -42,16 +42,36 @@
                 <mat-icon>done</mat-icon>
                 <h5 class="text-secondary"><strong>COMPLETE</strong></h5>
             </div>
-            <h2 class="mx-2"><strong>0 days</strong></h2>
-            <strong class="mx-2">------</strong>
+            <h2 class="mx-2">
+                <strong>{{ habit[0].success }} days</strong>
+            </h2>
+            <strong class="mx-2" *ngIf="habit[0].success === 0; else success"
+                >------</strong
+            >
+            <ng-template #success>
+                <strong class="text-success days ml-1">
+                    <mat-icon style="font-size: 20px">arrow_upward</mat-icon>
+                    <span>{{ habit[0].success }} days</span>
+                </strong>
+            </ng-template>
         </div>
         <div class="col half">
             <div class="status">
                 <mat-icon>close</mat-icon>
                 <h5 class="text-secondary"><strong>FAIL</strong></h5>
             </div>
-            <h2 class="mx-2"><strong>0 days</strong></h2>
-            <strong class="mx-2">------</strong>
+            <h2 class="mx-2">
+                <strong>{{ habit[0].fail }} days</strong>
+            </h2>
+            <strong class="mx-2" *ngIf="habit[0].fail === 0; else fail"
+                >------</strong
+            >
+            <ng-template #fail>
+                <strong class="text-danger days ml-1">
+                    <mat-icon style="font-size: 20px">arrow_upward</mat-icon>
+                    <span>{{ habit[0].fail }} days</span>
+                </strong>
+            </ng-template>
         </div>
     </div>
     <div class="row mx-1 mt-2" style="column-gap: 5px">
@@ -60,8 +80,18 @@
                 <mat-icon>arrow_right_alt</mat-icon>
                 <h5 class="text-secondary"><strong>SKIP</strong></h5>
             </div>
-            <h2 class="mx-2"><strong>0 days</strong></h2>
-            <strong class="mx-2">------</strong>
+            <h2 class="mx-2">
+                <strong>{{ habit[0].skip }} days</strong>
+            </h2>
+            <strong class="mx-2" *ngIf="habit[0].skip === 0; else skip"
+                >------</strong
+            >
+            <ng-template #skip>
+                <strong class="text-danger days ml-1">
+                    <mat-icon style="font-size: 20px">arrow_upward</mat-icon>
+                    <span>{{ habit[0].skip }} days</span>
+                </strong>
+            </ng-template>
         </div>
         <div class="col half">
             <div class="status">

@@ -6,7 +6,9 @@ const {
     deleteHabitController,
     editHabitController,
     getSingleHabit,
-    editHabitCatagoryController} = require('../../controller/user_controller');
+    editHabitCatagoryController,
+    updateProgressStatus,
+    checkInProgressStatus} = require('../../controller/user_controller');
 const {addHabitMiddleware} = require('../../middleware/user_middleware');
 
 
@@ -25,6 +27,14 @@ router.patch(
 router.patch(
     '/habit/catagory/:id',
     editHabitCatagoryController,
+);
+router.patch(
+    '/habit/progress/:hid/:pid',
+    updateProgressStatus,
+);
+router.patch(
+    '/habit/progress/check/:hid/:pid',
+    checkInProgressStatus,
 );
 router.delete(
     '/habit/:id',

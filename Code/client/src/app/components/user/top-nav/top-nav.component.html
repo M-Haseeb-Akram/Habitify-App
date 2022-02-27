@@ -10,8 +10,8 @@
                 placeholder="Search"
                 #input
                 (focusout)="cancelSearch()"
-                [ngModel]="userService.filterString | async"
-                (ngModelChange)="userService.filterString.next($event)"
+                [ngModel]="msgService.filterString | async"
+                (ngModelChange)="msgService.filterString.next($event)"
             />
         </button>
         <button (click)="picker.open()">
@@ -20,16 +20,17 @@
                 [matDatepicker]="picker"
                 class="px-1"
                 style="width: 80px; border: none; outline: none"
+                #input
                 *ngIf="!search"
-                [ngModel]="userService.datePicker | async"
-                (ngModelChange)="userService.datePicker.next($event)"
+                [ngModel]="msgService.datePicker | async"
+                (dateChange)="msgService.datePicker.next($event.value)"
             />
             <mat-datepicker #picker> </mat-datepicker>
             <mat-icon *ngIf="!search">arrow_drop_down</mat-icon>
         </button>
         <button #sortTrigger="matMenuTrigger" [matMenuTriggerFor]="sorting">
             <mat-icon>sort</mat-icon>
-            <span class="px-1" *ngIf="!search">Albhabetical</span>
+            <span class="px-1" *ngIf="!search">{{ sortType }}</span>
             <mat-icon *ngIf="!search">arrow_drop_down</mat-icon>
         </button>
         <mat-menu #sorting="matMenu" [overlapTrigger]="false" class="mt-2">
@@ -38,7 +39,10 @@
                     <mat-icon></mat-icon>
                     Reminder Time
                 </button>
-                <button mat-menu-item (click)="setSortingIndex('my-habits')">
+                <button
+                    mat-menu-item
+                    (click)="setSortingIndex('My Habits Order', 'my-habits')"
+                >
                     <mat-icon
                         [style.visibility]="
                             sortingInedex === 'my-habits' ? 'visible' : 'hidden'
@@ -69,7 +73,9 @@
                     <div class="dropdown">
                         <button
                             mat-menu-item
-                            (click)="setSortingIndex('ascending')"
+                            (click)="
+                                setSortingIndex('Alphabetical', 'ascending')
+                            "
                         >
                             <mat-icon
                                 [style.visibility]="
@@ -83,7 +89,9 @@
                         </button>
                         <button
                             mat-menu-item
-                            (click)="setSortingIndex('descending')"
+                            (click)="
+                                setSortingIndex('Alphabetical', 'descending')
+                            "
                         >
                             <mat-icon
                                 [style.visibility]="

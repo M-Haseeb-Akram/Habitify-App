@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs';
-/* eslint-disable @typescript-eslint/no-empty-function */
+import { MessageService } from './../../../services/message.service';
 import { UserService } from './../../../services/user.service';
 import { ElementRef } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -17,6 +16,7 @@ export class TopNavComponent implements OnInit {
     public sortingInedex = 'ascending';
     private today =  new Date();
     public start_date!: string;
+    public sortType = 'Alphabatical';
     @ViewChild('input', { static: false })
     set input(element: ElementRef<HTMLInputElement>) {
         if(element) {
@@ -24,26 +24,29 @@ export class TopNavComponent implements OnInit {
         }
     }
     constructor(public dialog: MatDialog,
-      private elementRef: ElementRef,
-      public userService: UserService) {
+      public userService: UserService,
+      public msgService: MessageService,
+    ) {
     }
 
     openDialog(): void {
-        const dialogRef = this.dialog.open(AddHabitsComponent, {
+        this.dialog.open(AddHabitsComponent, {
             width: '500px',
             data: {}
         });
     }
     ngOnInit(): void {
+        this.msgService.datePicker.next(this.today);
     }
 
     cancelSearch = () => {
         this.search = false;
-        this.userService.filterString.next('');
+        this.msgService.filterString.next('');
     }
 
-    setSortingIndex = (value: string) => {
-        this.userService.sortingValue.next(value);
+    setSortingIndex = (title: string, value: string) => {
+        this.msgService.sortingValue.next(value);
+        this.sortType = title;
         this.sortingInedex =  value;
     }
 

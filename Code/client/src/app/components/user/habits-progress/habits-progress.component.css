@@ -42,5 +42,9 @@ mat-icon {
     border: #bebdbd 1px solid;
     border-radius: 20px;
     padding: 10px;
-    /* margin-left: 1-px; */
+}
+
+.days {
+    display: flex;
+    flex-direction: row;
 }

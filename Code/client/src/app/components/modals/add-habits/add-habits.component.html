@@ -1,7 +1,7 @@
 <div class="main" *ngIf="isLoading"></div>
 <div class="main" *ngIf="!isLoading">
     <h3 mat-dialog-title>New Habit</h3>
-    <form [formGroup]="habitsForm" (ngSubmit)="onAddHabit()">
+    <form [formGroup]="habitsForm" (ngSubmit)="addHabit()">
         <div mat-dialog-content>
             <label for="name" class="mb-1">NAME</label>
             <div class="fields">
@@ -81,6 +81,7 @@
                         type="date"
                         style="width: 140px; margin-left: 10px"
                         formControlName="start_date"
+                        min="{{ startDate }}"
                     />
                 </div>
             </div>
@@ -101,7 +102,7 @@
                     mat-button
                     class="btn btn-light mx-2 text-danger"
                     type="button"
-                    (click)="userService.openDeleteDialog(editModeId)"
+                    (click)="msgService.openDeleteDialog(editModeId)"
                 >
                     Delete
                 </button>
@@ -123,7 +124,7 @@
                 <button
                     mat-button
                     mat-dialog-close
-                    (click)="userService.onNoClick()"
+                    (click)="msgService.onNoClick()"
                     class="btn btn-light mx-2"
                     type="button"
                 >

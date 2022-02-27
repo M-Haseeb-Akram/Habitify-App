@@ -1,3 +1,4 @@
+import { MessageService } from './services/message.service';
 import { AddHabitsComponent } from './components/modals/add-habits/add-habits.component';
 import { BrowserXhr } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -23,9 +24,10 @@ import { SortPipe } from './pipes/sort.pipe';
 import { DeleteConfirmationComponent } from './components/modals/delete-confirmation/delete-confirmation.component';
 import { ManageHabitsComponent } from './components/user/manage-habits/manage-habits.component';
 import { CompleteFilterPipe } from './pipes/complete-filter.pipe';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatePickerPipe } from './pipes/date-picker.pipe';
+import { UndoConfirmationComponent } from './components/modals/undo-confirmation/undo-confirmation.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +46,7 @@ import { DatePickerPipe } from './pipes/date-picker.pipe';
         ManageHabitsComponent,
         CompleteFilterPipe,
         DatePickerPipe,
+        UndoConfirmationComponent,
     ],
     imports: [
         BrowserModule,
@@ -58,6 +61,8 @@ import { DatePickerPipe } from './pipes/date-picker.pipe';
     providers: [
         {provide: BrowserXhr},
         CookieService,
+        DatePickerPipe,
+        MessageService,
         {
             provide: MatDialogRef,
             useValue: {}

@@ -1,11 +1,9 @@
+import { MessageService } from './../../../services/message.service';
 import { Habits } from './../../../models/habits.model';
 import { Subscription } from 'rxjs';
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer, Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
@@ -17,8 +15,8 @@ import { AppState } from 'src/app/store/state/app.state';
     styleUrls: ['./manage-habits.component.css']
 })
 export class ManageHabitsComponent implements OnInit, OnDestroy {
-    public active = 'active';
-    public catagory = 'all';
+    public activeMenu!: string;
+    public catagory!: string;
     public subscription!: Subscription;
     public filterSub!: Subscription;
     public viewHabitSub!: Subscription;
@@ -31,21 +29,23 @@ export class ManageHabitsComponent implements OnInit, OnDestroy {
     public searchFor = '';
     constructor(
     private titleService: Title,
-    private dialog: MatDialog,
-    private route: ActivatedRoute,
     public userService: UserService,
+    public msgService: MessageService,
     private store:Store<AppState>,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     ) {
+        const question_mark = "../../../../assets/icons/question-marks.svg";
         this.titleService.setTitle("Manage Habits - Habitify");
         this.matIconRegistry.addSvgIcon(
             "question_mark",
-            this.domSanitizer.bypassSecurityTrustResourceUrl("../../../../assets/icons/question-marks.svg")
+            this.domSanitizer.bypassSecurityTrustResourceUrl(question_mark)
         );
+        this.activeMenu = 'active';
+        this.catagory = 'all';
     }
     ngOnInit(): void {
-        this.filterSub = this.userService.getFilter().subscribe(filter => {
+        this.filterSub = this.msgService.getFilter().subscribe(filter => {
             this.searchFor = filter ;
         });
         this.subscription = this.store.select('user').pipe(
@@ -77,13 +77,13 @@ export class ManageHabitsComponent implements OnInit, OnDestroy {
                     this.archivedHabits.push(uh);
                 }
             });
-            this.manageHabits(this.catagory, this.active);
+            this.manageHabits(this.catagory, this.activeMenu);
         });
     }
 
     manageHabits = (catagory:string, activeMenu: string) => {
         this.catagory = catagory;
-        this.active = activeMenu;
+        this.activeMenu = activeMenu;
         if(catagory === 'all') {
             this.HabitsToShow = this.anyTimeHabits;
         }
@@ -104,7 +104,7 @@ export class ManageHabitsComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
         this.filterSub.unsubscribe();
-        this.userService.filterString.next('');
+        this.msgService.filterString.next('');
     }
 
 }

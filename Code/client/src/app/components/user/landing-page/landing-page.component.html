@@ -5,12 +5,10 @@
     <mat-sidenav-content>
         <div class="row main">
             <div class="col-md-8 content">
-                <app-top-nav></app-top-nav>
-                <mat-divider></mat-divider>
                 <router-outlet></router-outlet>
             </div>
             <div class="col-md-4 track-status">
-                <app-habits-progress></app-habits-progress>
+                <app-habits-progress *ngIf="progressMode"></app-habits-progress>
             </div>
         </div>
     </mat-sidenav-content>

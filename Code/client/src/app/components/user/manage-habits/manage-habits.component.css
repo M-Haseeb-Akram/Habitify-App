@@ -1,0 +1,98 @@
+:host {
+    font-size: small;
+    font-family: sans-serif;
+}
+.main {
+    display: flex;
+    flex-direction: row;
+}
+.catagories {
+    width: 330px;
+}
+.sidenav-container {
+    padding: 16px;
+    border-right: #e2e0e0 1px solid;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: small;
+    height: calc(100vh);
+}
+h3 {
+    font-weight: 500;
+}
+button span {
+    margin-left: 20px;
+}
+
+.menu-button {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 7px 10px 7px 2px;
+    border: none;
+    border-radius: 7px;
+    font-weight: 600;
+    color: gray;
+    background-color: transparent;
+    margin-bottom: 2px;
+    transition-duration: 0.4s;
+    justify-content: space-between;
+}
+.menu-button:hover {
+    background-color: rgb(173, 171, 171) !important;
+    color: black !important;
+}
+.active {
+    background-color: #0000ff !important;
+    color: white !important;
+}
+.menu-title {
+    display: flex;
+    flex-direction: row;
+}
+.active:hover {
+    background-color: #0000ff !important;
+    color: white !important;
+}
+mat-icon {
+    margin-left: 2px;
+}
+p {
+    margin-top: 2px;
+    font-weight: 600;
+    float: left !important;
+}
+.habits {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.results {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.search {
+    display: flex;
+    flex-direction: row;
+    border: #e2e0e0 1px solid;
+    height: 70%;
+    border-radius: 5px;
+    margin-left: auto;
+}
+.search-input {
+    border: none;
+    outline: none;
+}
+.dropdown button {
+    width: 200px;
+    color: rgb(48, 48, 49);
+    border: none;
+    border-radius: 5px;
+    font-weight: normal;
+}
+.dropdown button:hover {
+    background-color: #0000ff !important;
+    color: white !important;
+    border-radius: 0px !important;
+}

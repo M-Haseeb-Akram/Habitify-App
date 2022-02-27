@@ -1,21 +1,516 @@
-<div class="no-habits">
-    <div class="mt-1 demo">
-        <mat-icon style="color: green">directions_bike</mat-icon>
-        <div class="bar-1"></div>
+<app-top-nav></app-top-nav>
+<mat-divider></mat-divider>
+<div *ngIf="dailyHabits">
+    <div
+        *ngFor="
+            let habits of dailyHabits
+                | filter: searchFor:'Name'
+                | sort: sortType
+        "
+    >
+        <div class="habits mt-3">
+            <div class="status-action">
+                <mat-icon svgIcon="question" class="question_icon"></mat-icon>
+                <div class="title">
+                    <strong>{{ habits.Name }}</strong>
+                    <small class="text-secondary">
+                        {{ habits.progress.done }} /
+                        {{ habits.Goal }} times</small
+                    >
+                </div>
+            </div>
+            <div class="status-action">
+                <button
+                    class="mx-2"
+                    *ngIf="habits.Goal > 1"
+                    (click)="
+                        checkInHabit({
+                            hid: habits._id,
+                            pid: habits.progress._id,
+                            days: habits.schedual,
+                            done: habits.progress.done,
+                            goal: habits.Goal,
+                            status: habits.progress.status,
+                            success: habits.success
+                        })
+                    "
+                >
+                    <mat-icon>add</mat-icon>
+                    <span>1</span>
+                </button>
+                <button
+                    class="mx-2"
+                    *ngIf="habits.Goal == 1"
+                    (click)="
+                        checkInHabit({
+                            hid: habits._id,
+                            pid: habits.progress._id,
+                            days: habits.schedual,
+                            done: habits.progress.done,
+                            goal: habits.Goal,
+                            status: habits.progress.status,
+                            success: habits.success
+                        })
+                    "
+                >
+                    <mat-icon>done</mat-icon>
+                    <span>Done</span>
+                </button>
+                <button
+                    [matMenuTriggerFor]="habitMenu"
+                    [matMenuTriggerData]="{ habit: habits }"
+                    (click)="
+                        msgService.checkMode.next({
+                            mode: 'update',
+                            value: ''
+                        })
+                    "
+                >
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
     </div>
-    <div class="mt-1 demo">
-        <mat-icon color="primary">directions_run</mat-icon>
-        <div class="bar-1"></div>
+    <div
+        class="weekly"
+        *ngIf="(weeklyHabits | filter: searchFor:'Name').length > 0"
+    >
+        <mat-expansion-panel class="my-3" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>
+                        {{ (weeklyHabits | filter: searchFor:'Name').length }}
+                        This Week</strong
+                    >
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div
+                *ngFor="
+                    let habits of weeklyHabits
+                        | sort: sortType
+                        | filter: searchFor:'Name'
+                "
+            >
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >{{ habits.progress.done }} /
+                                {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button
+                            class="mx-2"
+                            *ngIf="habits.Goal > 1"
+                            (click)="
+                                checkInHabit({
+                                    hid: habits._id,
+                                    pid: habits.progress._id,
+                                    days: habits.schedual,
+                                    done: habits.progress.done,
+                                    goal: habits.Goal,
+                                    status: habits.progress.status,
+                                    success: habits.success
+                                })
+                            "
+                        >
+                            <mat-icon>add</mat-icon>
+                            <span>1</span>
+                        </button>
+                        <button
+                            class="mx-2"
+                            *ngIf="habits.Goal == 1"
+                            (click)="
+                                checkInHabit({
+                                    hid: habits._id,
+                                    pid: habits.progress._id,
+                                    days: habits.schedual,
+                                    done: habits.progress.done,
+                                    goal: habits.Goal,
+                                    status: habits.progress.status,
+                                    success: habits.success
+                                })
+                            "
+                        >
+                            <mat-icon>done</mat-icon>
+                            <span>Done</span>
+                        </button>
+                        <button
+                            [matMenuTriggerFor]="habitMenu"
+                            [matMenuTriggerData]="{ habit: habits }"
+                            (click)="
+                                msgService.checkMode.next({
+                                    mode: 'update',
+                                    value: ''
+                                })
+                            "
+                        >
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
     </div>
-    <div class="mt-1 demo">
-        <mat-icon style="color: orange">local_cafe</mat-icon>
-        <div class="bar-1"></div>
+    <div
+        class="monthly"
+        *ngIf="(monthlyHabits | filter: searchFor:'Name').length > 0"
+    >
+        <mat-expansion-panel class="my-3" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>
+                        {{ (monthlyHabits | filter: searchFor:'Name').length }}
+                        This Month</strong
+                    >
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div
+                *ngFor="
+                    let habits of monthlyHabits
+                        | sort: sortType
+                        | filter: searchFor:'Name'
+                "
+            >
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >{{ habits.progress.done }} /
+                                {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button
+                            class="mx-2"
+                            *ngIf="habits.Goal > 1"
+                            (click)="
+                                checkInHabit({
+                                    hid: habits._id,
+                                    pid: habits.progress._id,
+                                    days: habits.schedual,
+                                    done: habits.progress.done,
+                                    goal: habits.Goal,
+                                    status: habits.progress.status,
+                                    success: habits.success
+                                })
+                            "
+                        >
+                            <mat-icon>add</mat-icon>
+                            <span>1</span>
+                        </button>
+                        <button
+                            class="mx-2"
+                            *ngIf="habits.Goal == 1"
+                            (click)="
+                                checkInHabit({
+                                    hid: habits._id,
+                                    pid: habits.progress._id,
+                                    days: habits.schedual,
+                                    done: habits.progress.done,
+                                    goal: habits.Goal,
+                                    status: habits.progress.status,
+                                    success: habits.success
+                                })
+                            "
+                        >
+                            <mat-icon>done</mat-icon>
+                            <span>Done</span>
+                        </button>
+                        <button
+                            [matMenuTriggerFor]="habitMenu"
+                            [matMenuTriggerData]="{ habit: habits }"
+                            (click)="
+                                msgService.checkMode.next({
+                                    mode: 'update',
+                                    value: ''
+                                })
+                            "
+                        >
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
     </div>
-    <h3 class="my-3">The Start of a Better You!</h3>
-    <p class="text-secondary">Habits are like dominos. As one is formed,</p>
-    <p class="text-secondary">all others will follow!</p>
-    <button class="my-2 active" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-        <span>Add Habits</span>
-    </button>
+    <div
+        class="succes"
+        *ngIf="(successful | filter: searchFor:'Name').length > 0"
+    >
+        <mat-expansion-panel class="my-3" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>
+                        {{ (successful | filter: searchFor:'Name').length }}
+                        Success</strong
+                    >
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div
+                *ngFor="
+                    let habits of successful
+                        | sort: sortType
+                        | filter: searchFor:'Name'
+                "
+            >
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question2"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >{{ habits.progress.done }} /
+                                {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button
+                            [matMenuTriggerFor]="habitMenu"
+                            [matMenuTriggerData]="{ habit: habits }"
+                            (click)="
+                                msgService.checkMode.next({
+                                    mode: 'undo',
+                                    value: 'Complete'
+                                })
+                            "
+                        >
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <div class="skip" *ngIf="(skiped | filter: searchFor:'Name').length > 0">
+        <mat-expansion-panel class="my-3" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>
+                        {{ (skiped | filter: searchFor:'Name').length }}
+                        Skip</strong
+                    >
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div
+                *ngFor="
+                    let habits of skiped
+                        | sort: sortType
+                        | filter: searchFor:'Name'
+                "
+            >
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question2"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >{{ habits.progress.done }} /
+                                {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button
+                            [matMenuTriggerFor]="habitMenu"
+                            [matMenuTriggerData]="{ habit: habits }"
+                            (click)="
+                                msgService.checkMode.next({
+                                    mode: 'undo',
+                                    value: 'Skip'
+                                })
+                            "
+                        >
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <div class="fail" *ngIf="(failed | filter: searchFor:'Name').length > 0">
+        <mat-expansion-panel class="my-3" [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <strong>
+                        {{ (failed | filter: searchFor:'Name').length }}
+                        Fail</strong
+                    >
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div
+                *ngFor="
+                    let habits of failed
+                        | sort: sortType
+                        | filter: searchFor:'Name'
+                "
+            >
+                <div class="habits mt-3">
+                    <div class="status-action">
+                        <mat-icon
+                            svgIcon="question2"
+                            class="question_icon"
+                        ></mat-icon>
+                        <div class="title">
+                            <strong>{{ habits.Name }}</strong>
+                            <small class="text-secondary"
+                                >{{ habits.progress.done }} /
+                                {{ habits.Goal }} times</small
+                            >
+                        </div>
+                    </div>
+                    <div class="status-action">
+                        <button
+                            (click)="
+                                msgService.checkMode.next({
+                                    mode: 'undo',
+                                    value: 'Fail'
+                                })
+                            "
+                            [matMenuTriggerFor]="habitMenu"
+                            [matMenuTriggerData]="{ habit: habits }"
+                        >
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <mat-divider class="mt-2"></mat-divider>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <div class="no-habits" *ngIf="Habits.length === 0">
+        <div class="mt-1 demo">
+            <mat-icon style="color: green">directions_bike</mat-icon>
+            <div class="bar-1"></div>
+        </div>
+        <div class="mt-1 demo">
+            <mat-icon color="primary">directions_run</mat-icon>
+            <div class="bar-1"></div>
+        </div>
+        <div class="mt-1 demo">
+            <mat-icon style="color: orange">local_cafe</mat-icon>
+            <div class="bar-1"></div>
+        </div>
+        <h3 class="my-3">The Start of a Better You!</h3>
+        <p class="text-secondary">Habits are like dominos. As one is formed,</p>
+        <p class="text-secondary">all others will follow!</p>
+        <button class="my-2 active" (click)="msgService.openAddDialog()">
+            <mat-icon>add</mat-icon>
+            <span>Add Habits</span>
+        </button>
+    </div>
 </div>
+
+<mat-menu #habitMenu="matMenu">
+    <ng-template matMenuContent let-habit="habit">
+        <div class="dropdown">
+            <ng-container *ngIf="checkMode.mode === 'update'">
+                <button
+                    mat-fab
+                    (click)="
+                        checkInHabit({
+                            hid: habit._id,
+                            pid: habit.progress._id,
+                            days: habit.schedual,
+                            done: habit.progress.done,
+                            goal: habit.Goal,
+                            status: habit.progress.status,
+                            success: habit.success
+                        })
+                    "
+                >
+                    <mat-icon>done</mat-icon>
+                    <span>Check-In</span>
+                </button>
+                <button
+                    mat-fab
+                    (click)="
+                        skipOrFailHabit({
+                            hid: habit._id,
+                            pid: habit.progress._id,
+                            days: habit.schedual,
+                            skip: habit.skip,
+                            fail: habit.fail,
+                            status: 'skip'
+                        })
+                    "
+                >
+                    <mat-icon>arrow_right_alt</mat-icon>
+                    <span>Skip</span>
+                </button>
+                <button
+                    mat-fab
+                    (click)="
+                        skipOrFailHabit({
+                            hid: habit._id,
+                            pid: habit.progress._id,
+                            days: habit.schedual,
+                            skip: habit.skip,
+                            fail: habit.fail,
+                            status: 'fail'
+                        })
+                    "
+                >
+                    <mat-icon>clear</mat-icon>
+                    <span>Fail</span>
+                </button>
+            </ng-container>
+            <ng-container *ngIf="checkMode.mode === 'undo'">
+                <button
+                    mat-fab
+                    (click)="
+                        msgService.openUndoConfirmationBox({
+                            hid: habit._id,
+                            pid: habit.progress._id,
+                            status: habit.progress.status,
+                            days: habit.schedual,
+                            skip: habit.skip,
+                            fail: habit.fail,
+                            success: habit.success
+                        })
+                    "
+                >
+                    <mat-icon>refresh</mat-icon>
+                    <span>Undo {{ checkMode.value }}</span>
+                </button>
+            </ng-container>
+            <button mat-fab>
+                <mat-icon>keyboard</mat-icon>
+                <span>Log Progress</span>
+            </button>
+            <button mat-fab (click)="msgService.setEditMode(habit._id)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+            </button>
+            <button mat-fab (click)="msgService.setProgressMode(habit._id)">
+                <mat-icon>bar_chart</mat-icon>
+                <span>View Progress</span>
+            </button>
+        </div>
+    </ng-template>
+</mat-menu>

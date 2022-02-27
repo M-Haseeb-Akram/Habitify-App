@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { LogOut } from 'src/app/store/actions/auth.actions';
+import { LogOut } from 'src/app/store/actions/auth.action';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 @Component({
@@ -47,7 +47,7 @@ export class SideNavComponent implements OnInit {
             this.time = "Morning";
             this.timeIcon = "wb_sunny";
         }
-        else if (hours >= 12 && hours < 17) {
+        else if (hours >= 12 && hours < 18) {
             this.time = "Afternoon";
             this.timeIcon = "wb_sunny";
         }

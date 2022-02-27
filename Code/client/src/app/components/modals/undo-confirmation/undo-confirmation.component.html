@@ -1,0 +1,20 @@
+<div mat-dialog-title>
+    <mat-icon style="color: rgb(245, 185, 75)">warning</mat-icon>
+    <strong class="mx-2">Remove Log Value</strong>
+</div>
+<div mat-dialog-content class="mx-1 text-secondary">
+    <p>Log value will be removed for Today, do you want to undo this habit?</p>
+</div>
+<div mat-dialog-actions style="float: right">
+    <button mat-button class="btn btn-light mx-2" (click)="closeDeletion()">
+        Cancel
+    </button>
+    <button
+        mat-button
+        cdkFocusInitial
+        class="btn btn-primary"
+        (click)="undoHabit(value)"
+    >
+        Remove Data
+    </button>
+</div>

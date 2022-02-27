@@ -1,3 +1,4 @@
+import { Progress } from './progress.model';
 export interface Habits {
   userId: string,
   Name: string,
@@ -7,4 +8,6 @@ export interface Habits {
   start_date: Date,
   streak: number,
   catagory: string,
+  progress: Progress[],
+  _id?: string,
 }
